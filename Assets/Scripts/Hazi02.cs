@@ -14,9 +14,9 @@ public class Hazi02 : MonoBehaviour
     [SerializeField] float MinMaxP1 = 1.2f;
     [SerializeField] float MinMaxP2 = 2.3f;
 
-    [SerializeField] float Pit1 = 2.3f;
-    [SerializeField] float Pit2 = 2.3f;
-    [SerializeField] float Pit3 = 2.3f;
+    [SerializeField] float Pit1 = 3f;
+    [SerializeField] float Pit2 = 5f;
+    [SerializeField] float Pit3 = 4f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,7 +27,7 @@ public class Hazi02 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             if (LoadedAmmo > 0)
             {
@@ -110,7 +110,11 @@ public class Hazi02 : MonoBehaviour
 
             if (Mathf.Pow(a, 2) + Mathf.Pow(b, 2) == Mathf.Pow(c, 2))
             {
-                Debug.Log("Ez az!");
+                Debug.Log("Ez az! :)");
+            }
+            else
+            {
+                Debug.Log("Ez nem az! :(");
             }
         }
     }
@@ -152,6 +156,7 @@ public class Hazi02 : MonoBehaviour
     {
         int i1 = (int)p1;
         return i1+1;
+        //Ez hibás, ha egész a szám
     }
 
     float MyRound(float p1)

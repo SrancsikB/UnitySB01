@@ -16,6 +16,10 @@ public class Follower : MonoBehaviour
 
         Vector3 dir = Target.position - transform.position;
 
-        transform.rotation = Quaternion.LookRotation(dir);
+        if (dir!=Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(dir);
+        }
+        
     }
 }
