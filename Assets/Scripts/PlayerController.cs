@@ -6,12 +6,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] float angspeed;
+
+    [SerializeField] Transform CameraTransform;
+
     private void Update()
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Vector3 direction = new Vector3(h, 0, v);
+        //Vector3 direction = new Vector3(h, 0, v);
+        Vector3 direction = v * CameraTransform.forward + h * CameraTransform.right;
+        direction.y = 0;
         direction.Normalize();
 
         this.transform.position += direction * speed * Time.deltaTime;
