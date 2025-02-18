@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class Hazi02 : MonoBehaviour
