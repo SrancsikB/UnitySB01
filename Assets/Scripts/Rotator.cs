@@ -17,6 +17,7 @@ public class Rotator : MonoBehaviour
     void Update()
     {
         transform.Rotate(axis, angluarSpeed * Time.deltaTime, space);
+        
     }
 
     void OnDrawGizmosSelected()
