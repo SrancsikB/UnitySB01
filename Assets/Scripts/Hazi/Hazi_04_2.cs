@@ -30,8 +30,9 @@ public class Hazi_04_2 : MonoBehaviour
             transform.position += velocity * Time.deltaTime;
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y + jumpForce, transform.position.z);
-                velocity = Vector3.zero;
+                //transform.position = new Vector3(transform.position.x, transform.position.y + jumpForce, transform.position.z);
+                //velocity = Vector3.zero;
+                velocity = Vector3.up * jumpForce;
             }
 
             if (transform.position.y > upperLimit.position.y || transform.position.y < lowerLimit.position.y)

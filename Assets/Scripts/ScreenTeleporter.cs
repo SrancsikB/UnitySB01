@@ -19,21 +19,22 @@ public class ScreenTeleporter : MonoBehaviour
         Rect cameraRect = new Rect(cameraCenter - (cameraSize / 2), cameraSize);
 
         Bounds objectBound = collider.bounds;
-        Rect objectRect = new Rect(objectBound.min, objectBound.center);
+        //Rect objectRect = new Rect(objectBound.min, objectBound.center);
+        Rect objectRect = new Rect(objectBound.min, objectBound.extents);
 
         if (!cameraRect.Overlaps(objectRect))
         {
             //Teleport
 
             if (cameraRect.xMax < objectRect.xMin)
-                transform.position = new Vector2(cameraRect.xMin - objectRect.size.x / 2, transform.position.y);
+                transform.position = new Vector2(cameraRect.xMin + objectRect.size.x / 2, transform.position.y);
             else if (cameraRect.xMin > objectRect.xMax)
-                transform.position = new Vector2(cameraRect.xMax + objectRect.size.x / 2, transform.position.y);
+                transform.position = new Vector2(cameraRect.xMax - objectRect.size.x / 2, transform.position.y);
 
             if (cameraRect.yMax < objectRect.yMin)
-                transform.position = new Vector2(transform.position.x, cameraRect.yMin - objectRect.size.y / 2);
+                transform.position = new Vector2(transform.position.x, cameraRect.yMin + objectRect.size.y / 2);
             else if (cameraRect.yMin > objectRect.yMax)
-                transform.position = new Vector2(transform.position.x, cameraRect.yMax + objectRect.size.y / 2);
+                transform.position = new Vector2(transform.position.x, cameraRect.yMax - objectRect.size.y / 2);
 
             
         }

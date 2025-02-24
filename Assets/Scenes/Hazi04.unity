@@ -640,7 +640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accel: 5
-  jumpForce: 1
+  jumpForce: 6
   upperLimit: {fileID: 1894631643}
   lowerLimit: {fileID: 636964880}
 --- !u!135 &1825907560
