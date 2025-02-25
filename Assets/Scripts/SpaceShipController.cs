@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class SpaceShipController : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class SpaceShipController : MonoBehaviour
     [SerializeField] float accel = 10;
     [SerializeField] float drag = 0.5f;
 
-    [SerializeField] Projectile projectile;
+    [SerializeField] Projectile[] projectiles;
         
 
     Vector3 velocity;
+
+    int lastProj = 0;
 
     void Update()
     {
@@ -19,8 +22,16 @@ public class SpaceShipController : MonoBehaviour
         //Shoot--------------------
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Projectile newProjectile = Instantiate(projectile, transform.position, transform.rotation);
+            //int randomIndex = Random.Range(0, projectiles.Length);
+
+            int i = lastProj % projectiles.Length;
+
+            Projectile newProjectile = Instantiate(projectiles[i], transform.position, transform.rotation);
             newProjectile.SetStartVelocity(velocity);
+
+            lastProj += 1;
+            //if (lastProj >= projectiles.Length)
+            //    lastProj = 0;
         }
 
 

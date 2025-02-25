@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 4547807598479826746}
   - component: {fileID: 5990539140235997865}
   - component: {fileID: 115605194515910355}
-  - component: {fileID: -1794363931369926066}
-  - component: {fileID: 450356757163445533}
-  - component: {fileID: 5042528942300145261}
-  m_Layer: 8
-  m_Name: Projectile
+  - component: {fileID: -4817890141820784896}
+  - component: {fileID: -1100923681682924844}
+  - component: {fileID: 1379633690157679126}
+  m_Layer: 9
+  m_Name: ProjectileEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 3aad790845ea9f14a9e5da10a5d3f856, type: 3}
+  m_Sprite: {fileID: 7347755041974798689, guid: 8721cbbfe3ba6a8418cd21a8de3a410c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 0}
---- !u!58 &-1794363931369926066
+--- !u!58 &-4817890141820784896
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,7 +155,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 1.1875
---- !u!114 &450356757163445533
+--- !u!114 &-1100923681682924844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
---- !u!50 &5042528942300145261
+--- !u!50 &1379633690157679126
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0

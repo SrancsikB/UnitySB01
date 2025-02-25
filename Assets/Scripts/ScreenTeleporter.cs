@@ -4,23 +4,25 @@ public class ScreenTeleporter : MonoBehaviour
 {
     [SerializeField] Collider2D collider;
 
-    Camera cam;
+    CameraManager cameraManager;
+
+    
+
     private void Start()
     {
-        cam = Camera.main;
+         cameraManager = FindAnyObjectByType<CameraManager>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        float sizeY = cam.orthographicSize * 2;
-        Vector2 cameraSize = new Vector2(sizeY * cam.aspect, sizeY);
-        Vector2 cameraCenter = cam.transform.position;
-        Rect cameraRect = new Rect(cameraCenter - (cameraSize / 2), cameraSize);
+
+        
+        Rect cameraRect = cameraManager.GetCameraRect();
 
         Bounds objectBound = collider.bounds;
         //Rect objectRect = new Rect(objectBound.min, objectBound.center);
-        Rect objectRect = new Rect(objectBound.min, objectBound.extents);
+        Rect objectRect = new Rect(objectBound.min, objectBound.size);
 
         if (!cameraRect.Overlaps(objectRect))
         {
