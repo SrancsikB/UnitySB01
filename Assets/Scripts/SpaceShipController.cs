@@ -3,18 +3,25 @@ using System.Collections.Generic;
 
 public class SpaceShipController : MonoBehaviour
 {
-
+   
     [SerializeField] float angulerSpeed = 90;
     [SerializeField] float maxSpeed = 10;
     [SerializeField] float accel = 10;
-    [SerializeField] float drag = 0.5f;
+    //[SerializeField] float drag = 0.5f;
 
     [SerializeField] Projectile[] projectiles;
         
 
-    Vector3 velocity;
+   
 
     int lastProj = 0;
+
+    Rigidbody2D rigidBody;
+
+    private void Awake()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
 
     void Update()
     {
@@ -27,7 +34,7 @@ public class SpaceShipController : MonoBehaviour
             int i = lastProj % projectiles.Length;
 
             Projectile newProjectile = Instantiate(projectiles[i], transform.position, transform.rotation);
-            newProjectile.SetStartVelocity(velocity);
+            newProjectile.SetStartVelocity(rigidBody.linearVelocity);
 
             lastProj += 1;
             //if (lastProj >= projectiles.Length)
@@ -37,8 +44,9 @@ public class SpaceShipController : MonoBehaviour
 
         float rotationInput = Input.GetAxisRaw("Horizontal");
         transform.Rotate(0, 0, -rotationInput * angulerSpeed * Time.deltaTime);
+        rigidBody.rotation = transform.rotation.eulerAngles.z;
 
-        transform.position += velocity * Time.deltaTime;
+        //transform.position += velocity * Time.deltaTime;
 
 
     }
@@ -54,11 +62,18 @@ public class SpaceShipController : MonoBehaviour
         float movementInput = Input.GetAxisRaw("Vertical");
 
         if (movementInput < 0) movementInput = 0;
-        Vector3 accelVector = transform.up * movementInput * this.accel;
-        velocity += accelVector * Time.fixedDeltaTime;
+        Vector2 accelVector = transform.up * movementInput * this.accel;
+        rigidBody.linearVelocity += accelVector * Time.fixedDeltaTime;
+
+        //rigidBody.AddForce(accelVector, ForceMode2D.Force);
+
+
+        /*
         Vector3 dragVector = velocity * drag;
         velocity -= dragVector * Time.fixedDeltaTime;
-        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+        
+        */
 
+        rigidBody.linearVelocity = Vector3.ClampMagnitude(rigidBody.linearVelocity, maxSpeed);
     }
 }

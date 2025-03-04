@@ -33,7 +33,8 @@ public class Projectile : MonoBehaviour
 
         age += Time.deltaTime;
 
-        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1 - (age / duration));  //Elhalvanyul...
+        Color newC = GetComponent<SpriteRenderer>().color;
+        GetComponent<SpriteRenderer>().color = new Color(newC.r, newC.g, newC.b, 1 - (age / duration));  //Elhalvanyul...
         transform.Rotate(0, 0, -180 * Time.deltaTime);
 
         if (age >= duration)

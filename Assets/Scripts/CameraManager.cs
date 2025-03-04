@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -11,6 +12,14 @@ public class CameraManager : MonoBehaviour
         return cameraRect;
     }
 
+
+    public Vector3 GetRandomPositionInCamera()
+    {
+        float x = Random.Range(cameraRect.xMin, cameraRect.xMax);
+        float y = Random.Range(cameraRect.yMin, cameraRect.yMax);
+
+        return  new Vector3(x, y);
+    }
     void OnValidate()   
     {
         if (cam==null)

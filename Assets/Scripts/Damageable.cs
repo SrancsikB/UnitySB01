@@ -4,6 +4,8 @@ public class Damageable : MonoBehaviour
 {
     [SerializeField] float startHP = 100;
     [SerializeField] Behaviour disableObj;
+    [SerializeField] bool destroyOnDeath = true;
+    [SerializeField] GameObject[] spawnOnDeath;
 
     float currentHP;
 
@@ -26,10 +28,27 @@ public class Damageable : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            Debug.Log("Died :(");
-            disableObj.enabled = false;
+            OnDeath();
         }
 
 
+    }
+
+    private void OnDeath()
+    {
+        if (disableObj!=null)
+        {
+            disableObj.enabled = false;
+        }
+        
+        if (destroyOnDeath)
+        {
+            Destroy(gameObject);
+        }
+
+        foreach (GameObject item in spawnOnDeath)
+        {
+            Instantiate(item, transform.position, transform.rotation);
+        }
     }
 }
