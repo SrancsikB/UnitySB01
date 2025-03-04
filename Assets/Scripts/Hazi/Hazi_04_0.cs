@@ -3,7 +3,7 @@ using UnityEngine;
 public class Hazi_04_0 : MonoBehaviour
 {
     [SerializeField] float rotSpeed = 60;
-    [SerializeField] float angleToRotate = 90;
+    [SerializeField] float angleToRotate = 45;
     float targetAngle;
     int rotDirection;
 
