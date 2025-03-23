@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 
 public class Damageable : MonoBehaviour
@@ -7,9 +9,15 @@ public class Damageable : MonoBehaviour
     [SerializeField] bool destroyOnDeath = true;
     [SerializeField] GameObject[] spawnOnDeath;
 
+    public event Action HPChanged;
+    public event Action Died;
+
     float currentHP;
 
-    private void Start()
+    public float GetCurrentHP => currentHP;
+    public float GetStartHP => startHP;
+
+    private void Awake()
     {
         currentHP = startHP;
     }
@@ -31,16 +39,19 @@ public class Damageable : MonoBehaviour
             OnDeath();
         }
 
+        HPChanged?.Invoke();
 
     }
 
+ 
+
     private void OnDeath()
     {
-        if (disableObj!=null)
+        if (disableObj != null)
         {
             disableObj.enabled = false;
         }
-        
+
         if (destroyOnDeath)
         {
             Destroy(gameObject);
@@ -50,5 +61,8 @@ public class Damageable : MonoBehaviour
         {
             Instantiate(item, transform.position, transform.rotation);
         }
+        Died?.Invoke();
     }
+
+
 }

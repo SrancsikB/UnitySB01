@@ -8,6 +8,10 @@ public class SpaceShipController : MonoBehaviour
     [SerializeField] float maxSpeed = 10;
     [SerializeField] float accel = 10;
     //[SerializeField] float drag = 0.5f;
+    [SerializeField] Transform gun;
+    
+    [SerializeField] GameObject bullsEye;
+    [SerializeField] LayerMask bullsEyeMask;
 
     [SerializeField] Projectile[] projectiles;
         
@@ -33,7 +37,7 @@ public class SpaceShipController : MonoBehaviour
 
             int i = lastProj % projectiles.Length;
 
-            Projectile newProjectile = Instantiate(projectiles[i], transform.position, transform.rotation);
+            Projectile newProjectile = Instantiate(projectiles[i], gun.position, transform.rotation);
             newProjectile.SetStartVelocity(rigidBody.linearVelocity);
 
             lastProj += 1;
@@ -48,6 +52,17 @@ public class SpaceShipController : MonoBehaviour
 
         //transform.position += velocity * Time.deltaTime;
 
+
+
+        //Raycast
+
+        Ray2D ray = new(transform.position, transform.up);
+        RaycastHit2D hit = Physics2D.Raycast(gun.position, transform.up, float.PositiveInfinity ,bullsEyeMask);
+        if (hit.collider!=null)
+        {
+            bullsEye.transform.position = hit.point;
+        }
+        bullsEye.SetActive(hit.collider != null);
 
     }
 
@@ -75,5 +90,20 @@ public class SpaceShipController : MonoBehaviour
         */
 
         rigidBody.linearVelocity = Vector3.ClampMagnitude(rigidBody.linearVelocity, maxSpeed);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 mousePixel = Input.mousePosition;
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mousePixel);
+
+        mousePixel.z = 10;
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawSphere(mouseWorld, 2f);
+    }
+
+    private void OnMouseEnter()
+    {
+        Debug.Log(name);
     }
 }
